@@ -49,10 +49,8 @@ router.put('/:id', auth, async (req, res) => {
     if (email) contactFields.email = email;
     if (phone) contactFields.phone = phone;
     if (type) contactFields.type = type;
-    console.log('asfasdfasfadfafaasf')
     try {
         let contact = await Contact.findById(req.params.id)
-        console.log('found?')
         if (!contact) return res.status(400).json({msg: "contact not found"})
         //make sure user owns contact
         if (contact.user.toString() !== req.user.id) {
@@ -69,8 +67,20 @@ router.put('/:id', auth, async (req, res) => {
 // @route   DELETE api/contacts/:id   // :id is a placejholder for the contact
 // @desc    Delete contact
 // @access  Private
-router.delete('/:id', auth, (req, res) => {
-    res.send("Delete contact");
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        let contact = await Contact.findById(req.params.id)
+        if (!contact) return res.status(400).json({msg: "contact not found"})
+        //make sure user owns contact
+        if (contact.user.toString() !== req.user.id) {
+            return res.status(401).json({"msg": 'not authorized'})
+        }
+        contact = await Contact.findByIdAndRemove(req.params.id)
+        res.json({msg: 'contact removed'})
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).send('server error...')
+    }
 })
 
 module.exports = router;
