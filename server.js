@@ -13,7 +13,7 @@ app.get('/', (req, res) => res.json(
 
 // Define Routes
 app.use('/api/users', require('./routes/users'))
-app.use('/api/contact', require('./routes/contact'))
+app.use('/api/contacts', require('./routes/contacts'))
 app.use('/api/auth', require('./routes/auth'))
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}...`))
