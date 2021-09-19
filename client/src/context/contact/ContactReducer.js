@@ -23,12 +23,20 @@ const ContactReducer = (state, action) => {
         case CLEAR_CURRENT:
             return {...state, current: null}
         case UPDATE_CONTACT:
-            console.log('action',action)
-            console.log('state',state)
             return {
                 ...state,
                 contacts: state.contacts.map(c => c.id === action.payload.id ? action.payload : c)
             }
+        case FILTER_CONTACT:
+            return {
+                ...state, filtered: state.contacts.filter(c => {
+                        const regex = new RegExp(`${action.payload}`, 'gi')
+                        return c.name.match(regex) || c.email.match(regex)
+                    }
+                )
+            }
+        case CLEAR_FILTER:
+            return {...state, filtered : null}
     }
 }
 

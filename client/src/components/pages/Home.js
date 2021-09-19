@@ -1,6 +1,7 @@
 import React from 'react';
 import Contacts from "../contacts/Contacts";
 import ContactForm from "../contacts/ContactForm";
+import ContactFilter from "../contacts/contactFilter";
 
 const Home = (props) => {
     return <div className="grid-2">
@@ -8,6 +9,7 @@ const Home = (props) => {
             <ContactForm/>
         </div>
         <div>
+            <ContactFilter/>
             <Contacts/>
         </div>
     </div>
