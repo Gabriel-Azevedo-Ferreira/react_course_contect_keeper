@@ -387,17 +387,21 @@ table th {
 /* Animation (Add After) */
 .item-enter {
   opacity: 0;
+  transform: translateX(500px);
 }
 .item-enter-active {
   opacity: 1;
-  transition: opacity 1000ms ease-in;
+  transition: transform 500ms ease-out, opacity 800ms ease-out;
+  transform: translateX(0);
 }
 .item-exit {
   opacity: 1;
+  transform: translateX(0);
 }
 .item-exit-active {
-  opacity: 0;
-  transition: opacity 1000ms ease-in;
+  opacity: 0.1;
+  transition: transform 500ms ease-in, opacity 800ms ease-out;
+  transform: translateX(1000px);
 }
 
 /* Mobile Styles */

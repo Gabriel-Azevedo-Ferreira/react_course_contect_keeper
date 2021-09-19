@@ -6,7 +6,6 @@ function ContactFilter(props) {
     const {filterContact, clearFilter} = contactContext
     const onChange = (e) => {
         const val = e.target.value
-        console.log(val)
         if (val === '') {
             clearFilter()
         } else {
