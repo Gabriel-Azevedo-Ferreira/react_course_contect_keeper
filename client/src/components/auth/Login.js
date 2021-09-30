@@ -1,12 +1,28 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import AlertContext from "../../context/alert/AlertContext";
+import AuthContext from "../../context/auth/authContext";
 
 function Login(props) {
+    const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+
+    const {setAlert} = alertContext;
+    const {login, clearErrors, error, isAuthenticated} = authContext;
+    useEffect(() => {
+        if (isAuthenticated) props.history.push('/')
+        if (error === 'invalid credentials') {
+            setAlert(error, 'danger')
+            clearErrors()
+        }
+    }, [isAuthenticated, error]);
+
+
     const [user, setUser] = useState({email: '', password: ''});
     const {email, password} = user;
     const onChange = e => setUser({...user, [e.target.name]: e.target.value})
     const onSubmit = e => {
         e.preventDefault()
-        console.log('On Submit') // TODO
+        login({email, password})
     }
 
     return (

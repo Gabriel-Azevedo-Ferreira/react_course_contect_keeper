@@ -2,7 +2,15 @@ import React, {useReducer} from "react";
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
 import axios from "axios";
-import {AUTH_ERROR, CLEAR_ERRORS, REGISTER_FAIL, REGISTER_SUCCES, USER_LOADED} from "../types";
+import {
+    AUTH_ERROR,
+    CLEAR_ERRORS,
+    LOGIN_FAIL,
+    LOGIN_SUCCES,
+    REGISTER_FAIL,
+    REGISTER_SUCCES,
+    USER_LOADED
+} from "../types";
 import setAuthToken from "../../utils/setAuthToken";
 
 const AuthState = props => {
@@ -37,13 +45,26 @@ const AuthState = props => {
         try {
             const res = await axios.post('/api/users', formData, config)
             dispatch({type: REGISTER_SUCCES, payload: res.data})
+            await loadUser()
         } catch (e) {
             dispatch({type: REGISTER_FAIL, payload: e.response.data.msg})
         }
-        loadUser()
     }
     // login user
-    const login = () => console.log("login")
+    const login = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        try {
+            const res = await axios.post('/api/auth', formData, config)
+            dispatch({type: LOGIN_SUCCES, payload: res.data})
+            await loadUser()
+        } catch (e) {
+            dispatch({type: LOGIN_FAIL, payload: e.response.data.msg})
+        }
+    }
 
     // logout
     const logout = () => console.log("logout")
