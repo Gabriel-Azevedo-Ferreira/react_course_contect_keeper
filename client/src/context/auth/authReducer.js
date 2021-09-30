@@ -1,7 +1,7 @@
 import {CLEAR_ERRORS, REGISTER_FAIL, REGISTER_SUCCES} from "../types";
 
 export default (state, action) => {
-    switch (action.payload){
+    switch (action.type){
         case REGISTER_SUCCES:
             localStorage.setItem('token', action.payload.token)
             return{
@@ -18,7 +18,7 @@ export default (state, action) => {
                 error: action.payload,
             }
         case CLEAR_ERRORS:
-            return {...state, errors: null}
+            return {...state, error: null}
         default:
             return state
     }

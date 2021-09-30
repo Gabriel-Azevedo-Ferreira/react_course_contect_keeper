@@ -3,7 +3,6 @@ import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
 import axios from "axios";
 import {CLEAR_ERRORS, REGISTER_FAIL, REGISTER_SUCCES} from "../types";
-import {log} from "nodemon/lib/utils";
 
 const AuthState = props => {
     const initialState = {

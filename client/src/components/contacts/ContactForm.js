@@ -20,10 +20,8 @@ function ContactForm() {
     // console.log('curr:', current)
     useEffect(() => {
         if (current !== null) {
-            console.log('set')
             setContact(current)
         } else {
-            console.log('clear')
             setContact({name: '', email: '', phone: '', type: 'personal'})
         }
     }, [contactContext, current]);
