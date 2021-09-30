@@ -1,6 +1,9 @@
 import React, {useReducer} from "react";
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
+import axios from "axios";
+import {CLEAR_ERRORS, REGISTER_FAIL, REGISTER_SUCCES} from "../types";
+import {log} from "nodemon/lib/utils";
 
 const AuthState = props => {
     const initialState = {
@@ -13,10 +16,30 @@ const AuthState = props => {
     const [state, dispatch] = useReducer(AuthReducer, initialState)
 
     // load user
+    const loadUser = () => console.log("load user")
+
     // register user
+    const register = async formData => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        try {
+            const res = await axios.post('/api/users', formData, config)
+            dispatch({type: REGISTER_SUCCES, payload: res.data})
+        } catch (e) {
+            dispatch({type: REGISTER_FAIL, payload: e.response.data.msg})
+        }
+    }
     // login user
+    const login = () => console.log("login")
+
     // logout
+    const logout = () => console.log("logout")
     // clear erros
+    const clearErrors = () => dispatch({type: CLEAR_ERRORS})
+
     return <AuthContext.Provider value={
         {
             token: state.token,
@@ -24,6 +47,11 @@ const AuthState = props => {
             loading: state.loading,
             error: state.error,
             user: state.user,
+            register,
+            loadUser,
+            login,
+            logout,
+            clearErrors,
         }
     }>
         {props.children}
