@@ -10,6 +10,11 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import AlertState from "./context/alert/AlertState";
 import Alerts from "./components/layout/Alerts";
+import setAuthToken from "./utils/setAuthToken";
+
+// we can add it to the component, but this will run everytime the component changes (unnecessary)
+// we could also do a useEffect, so it runs on the first time only
+if (localStorage.token) setAuthToken(localStorage.token)
 
 function App() {
     return (

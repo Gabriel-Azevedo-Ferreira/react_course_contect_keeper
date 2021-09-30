@@ -1,4 +1,4 @@
-import {CLEAR_ERRORS, REGISTER_FAIL, REGISTER_SUCCES} from "../types";
+import {AUTH_ERROR, CLEAR_ERRORS, REGISTER_FAIL, REGISTER_SUCCES, USER_LOADED} from "../types";
 
 export default (state, action) => {
     switch (action.type){
@@ -7,6 +7,11 @@ export default (state, action) => {
             return{
                 ...state, ...action.payload, isAuthenticated: true, loading: false
             }
+        case USER_LOADED:
+            return {
+                ...state, user: action.payload, isAuthenticated: true, loading: false
+            }
+        case AUTH_ERROR:
         case REGISTER_FAIL:
             localStorage.removeItem('token')
             return{

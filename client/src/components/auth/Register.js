@@ -6,7 +6,7 @@ function Register(props) {
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
     const {setAlert} = alertContext;
-    const {register, clearErrors, error} = authContext;
+    const {register, clearErrors, error, isAuthenticated} = authContext;
     const [user, setUser] = useState({name: '', email: '', password: '', password2: ''});
     const {name, email, password, password2} = user;
     const onChange = e => setUser({...user, [e.target.name]: e.target.value})
@@ -21,11 +21,12 @@ function Register(props) {
         }
     }
     useEffect(() => {
+        if (isAuthenticated) props.history.push('/')
         if (error === 'user exists') {
             setAlert(error, 'danger')
             clearErrors()
         }
-    }, [setAlert, error]);
+    }, [isAuthenticated, error, props.history]);
 
 
     return (
