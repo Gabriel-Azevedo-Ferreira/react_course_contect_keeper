@@ -11,6 +11,7 @@ import Login from "./components/auth/Login";
 import AlertState from "./context/alert/AlertState";
 import Alerts from "./components/layout/Alerts";
 import setAuthToken from "./utils/setAuthToken";
+import PrivateRoute from "./routes/PrivateRoute";
 
 // we can add it to the component, but this will run everytime the component changes (unnecessary)
 // we could also do a useEffect, so it runs on the first time only
@@ -27,7 +28,7 @@ function App() {
                             <div className="container">
                                 <Alerts/>
                                 <Switch>
-                                    <Route exact path='/' component={Home}/>
+                                    <PrivateRoute exact path='/' component={Home}/>
                                     <Route exact path='/about' component={About}/>
                                     <Route exact path='/register' component={Register}/>
                                     <Route exact path='/login' component={Login}/>
