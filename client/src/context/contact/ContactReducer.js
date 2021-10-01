@@ -5,7 +5,7 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     FILTER_CONTACT,
-    CLEAR_FILTER,
+    CLEAR_FILTER, CONTACT_ERROR, CLEAR_ERRORS,
 } from '../types'
 
 const ContactReducer = (state, action) => {
@@ -37,6 +37,10 @@ const ContactReducer = (state, action) => {
             }
         case CLEAR_FILTER:
             return {...state, filtered : null}
+        case CONTACT_ERROR:
+            return {...state, error : action.payload}
+        case CLEAR_ERRORS:
+            return {...state, error : null}
     }
 }
 

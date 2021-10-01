@@ -12,7 +12,7 @@ const Contacts = (props) => {
         <Fragment>
             <TransitionGroup>
                 {shown.map(contact => (
-                    <CSSTransition key={contact.id} timeout={800} classNames="item">
+                    <CSSTransition key={contact._id} timeout={800} classNames="item">
                         <ContactItem contact={contact}/>
                     </CSSTransition>)
                 )}
