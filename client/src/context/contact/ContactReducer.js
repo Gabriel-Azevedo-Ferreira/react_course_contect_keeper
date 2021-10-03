@@ -28,7 +28,9 @@ const ContactReducer = (state, action) => {
                 filtered: null,
             }
         case DELETE_CONTACT:
-            return {...state, contacts: state.contacts.filter(c => c.id !== action.payload), loading: false}
+            console.log('state.contacts',state.contacts)
+            console.log('action',action)
+            return {...state, contacts: state.contacts.filter(c => c._id !== action.payload), loading: false}
 
         case SET_CCURRENT:
             return {...state, current: action.payload}
@@ -37,7 +39,7 @@ const ContactReducer = (state, action) => {
         case UPDATE_CONTACT:
             return {
                 ...state,
-                contacts: state.contacts.map(c => c.id === action.payload.id ? action.payload : c),
+                contacts: state.contacts.map(c => c._id === action.payload._id ? action.payload : c),
                 loading: false,
             }
         case FILTER_CONTACT:
