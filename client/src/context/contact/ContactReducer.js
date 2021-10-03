@@ -5,7 +5,7 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     FILTER_CONTACT,
-    CLEAR_FILTER, CONTACT_ERROR, CLEAR_ERRORS, GET_CONTACTS,
+    CLEAR_FILTER, CONTACT_ERROR, CLEAR_ERRORS, GET_CONTACTS, CLEAR_CONTACTS,
 } from '../types'
 
 const ContactReducer = (state, action) => {
@@ -19,6 +19,13 @@ const ContactReducer = (state, action) => {
         case GET_CONTACTS:
             return {
                 ...state, contacts: action.payload, loading: false
+            }
+
+        case CLEAR_CONTACTS:
+            return {
+                ...state, contacts: [],
+                current: null,
+                filtered: null,
             }
         case DELETE_CONTACT:
             return {...state, contacts: state.contacts.filter(c => c.id !== action.payload), loading: false}

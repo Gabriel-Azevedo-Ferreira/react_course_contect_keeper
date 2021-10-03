@@ -8,9 +8,7 @@ const Home = (props) => {
     const authContext = useContext(AuthContext)
     const {loadUser} = authContext
     useEffect(() => {
-        console.log('loading user...')
         loadUser()
-        console.log('done...')
     }, []);
 
     return <div className="grid-2">
