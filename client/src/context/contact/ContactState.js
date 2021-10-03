@@ -8,7 +8,7 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     FILTER_CONTACT,
-    CLEAR_FILTER, CONTACT_ERROR,
+    CLEAR_FILTER, CONTACT_ERROR, GET_CONTACTS,
 } from '../types'
 import axios from "axios";
 // import v4 from 'uuid';
@@ -33,6 +33,17 @@ const ContactState = props => {
         }
     }
 
+    //get contacts
+    const getContacts = async () => {
+        const config = {headers: {'Content-Type': 'application/json'}}
+        try{
+            const res = await axios.get('api/contacts', config)
+            dispatch({type: GET_CONTACTS, payload: res.data})
+        } catch (e) {
+            dispatch({type: CONTACT_ERROR, payload: e.response.msg})
+        }
+    }
+
     // DELETE_CONTACT
     const deleteContact = (id) => {
         dispatch({type: DELETE_CONTACT, payload: id})
@@ -50,6 +61,7 @@ const ContactState = props => {
 
     // UPDATE_CONTACT
     const updateContact = (contact) => {
+
         dispatch({type: UPDATE_CONTACT, payload: contact})
     }
 
@@ -74,6 +86,7 @@ const ContactState = props => {
             updateContact,
             filterContact,
             clearFilter,
+            getContacts,
         }
     }>
         {props.children}

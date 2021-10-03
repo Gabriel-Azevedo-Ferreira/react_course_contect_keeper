@@ -7,7 +7,11 @@ import AuthContext from "../../context/auth/authContext";
 const Home = (props) => {
     const authContext = useContext(AuthContext)
     const {loadUser} = authContext
-    useEffect(() => loadUser(), []);
+    useEffect(() => {
+        console.log('loading user...')
+        loadUser()
+        console.log('done...')
+    }, []);
 
     return <div className="grid-2">
         <div>

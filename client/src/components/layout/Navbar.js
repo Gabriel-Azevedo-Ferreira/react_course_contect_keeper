@@ -1,14 +1,17 @@
-import React, {Fragment, useContext} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
 const Navbar = ({title, icon}) => {
     const authContext = useContext(AuthContext);
-    const {user, isAuthenticated, logout} = authContext
+    const {user, isAuthenticated, logout, loadUser} = authContext
     const onLogout = () => {
         logout()
     }
+    useEffect(() => {
+        loadUser()
+    }, []);
     const authLinks = (
         <Fragment>
             <li> Hello {user && user.name}</li>

@@ -28,7 +28,6 @@ const AuthState = props => {
         if (localStorage.token) setAuthToken(localStorage.token)
         try {
             const res = await axios.get('/api/auth')
-            console.log('user: ', res.data)
             dispatch({type: USER_LOADED, payload: res.data})
         } catch (e) {
             dispatch({type: AUTH_ERROR})
